@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:tns="http://www.bp.org/movie/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="movie"
+                  targetNamespace="http://www.bp.org/movie/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:bp="http://www.bp.org">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.bp.org/">
+            <xsd:import schemaLocation="movie.xsd" namespace="http://www.bp.org"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="bookMovieRequestMsg">
+        <wsdl:part element="bp:bookMovieRequest" name="payload"/>
+    </wsdl:message>
+    <wsdl:message name="bookMovieResponseMsg">
+        <wsdl:part element="bp:bookMovieResponse" name="payload"/>
+    </wsdl:message>
+    <wsdl:message name="cancelBookingRequestMsg">
+        <wsdl:part element="bp:cancelBookingRequest" name="payload"/>
+    </wsdl:message>
+    <wsdl:message name="cancelBookingResponseMsg">
+        <wsdl:part element="bp:cancelBookingResponse" name="payload"/>
+    </wsdl:message>
+    <wsdl:message name="movieFaultMsg">
+        <wsdl:part element="bp:movieFault" name="payload"/>
+    </wsdl:message>
+    <wsdl:portType name="MovieBooking">
+        <wsdl:operation name="bookMovie">
+            <wsdl:input message="tns:bookMovieRequestMsg"/>
+            <wsdl:output message="tns:bookMovieResponseMsg"/>
+            <wsdl:fault name="movieFault" message="tns:movieFaultMsg"/>
+        </wsdl:operation>
+        <wsdl:operation name="cancelBooking">
+            <wsdl:input message="tns:cancelBookingRequestMsg"/>
+            <wsdl:output message="tns:cancelBookingResponseMsg"/>
+            <wsdl:fault name="movieFault" message="tns:movieFaultMsg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MovieBookingSOAP" type="tns:MovieBooking">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="bookMovie">
+            <soap:operation soapAction="http://www.bp.org/movie/bookMovie"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="movieFault">
+                <soap:fault name="movieFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelBooking">
+            <soap:operation soapAction="http://www.bp.org/movie/cancelBooking"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="movieFault">
+                <soap:fault name="movieFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="MovieBookingService">
+        <wsdl:port name="MovieBookingPort" binding="tns:MovieBookingSOAP">
+            <soap:address location="http://www.bp.org/movie/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

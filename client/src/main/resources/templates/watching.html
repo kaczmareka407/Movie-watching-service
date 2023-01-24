@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Watching movie</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<style>
+    h1 {
+        text-align: center;
+        border: 1px solid powderblue;
+    }
+
+    h2 {
+        margin: 50px;
+    }
+
+    h3 {
+        margin: 50px;
+    }
+
+    p {
+        margin: 50px;
+    }
+</style>
+<body>
+<h1>Watch movie</h1>
+<form action="#" th:action="@{/watching}" th:object="${bookMovieRequest}" method="post">
+    <div id="Personal information">
+        <h3>Personal information</h3>
+        <p>First name: <input type="text" th:field="*{person.firstName}"/></p>
+        <p>Last name: <input type="text" th:field="*{person.lastName}"/></p>
+    </div>
+    <div id="Account">
+        <h3>Account subscription</h3>
+        <p>From: <input type="date" th:field="*{movieSubscription.from}"/></p>
+        <p>To: <input type="date" th:field="*{movieSubscription.to}"/></p>
+        <p>Type account: <input type="text" th:field="*{movieSubscription.typeAccount}"/></p>
+    </div>
+    <div id="Movie">
+        <h3>Movie</h3>
+        <p>Name: <input type="text" th:field="*{movie.name}"/></p>
+        <p>Category: <input type="text" th:field="*{movie.category}"/></p>
+        <p>Country: <input type="text" th:field="*{movie.country}"/></p>
+    </div>
+    <div id="Payment">
+        <h3>Payment</h3>
+        <p>Card type: <input type="text" th:field="*{paymentCard.name}"/></p>
+        <p>Card valid to: <input type="text" th:field="*{paymentCard.validTo}"/></p>
+        <p>Card number: <input type="text" th:field="*{paymentCard.number}"/></p>
+    </div>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+<a href="/watching/payment">Get payment information</a>
+</body>
+</html>

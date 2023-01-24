@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://accountsubscribing.bp.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="AccountSubsribingServiceService" targetNamespace="http://accountsubscribing.bp.org/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://accountsubscribing.bp.org/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://accountsubscribing.bp.org/">
+  <xs:element name="bookMovieSubscription" type="tns:bookMovieSubscription"/>
+  <xs:element name="bookMovieSubscriptionResponse" type="tns:bookMovieSubscriptionResponse"/>
+  <xs:element name="cancelBooking" type="tns:cancelBooking"/>
+  <xs:element name="cancelBookingResponse" type="tns:cancelBookingResponse"/>
+  <xs:complexType name="cancelBooking">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cancelBookingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:subscribingInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="subscribingInfo">
+    <xs:sequence>
+      <xs:element name="cost" type="xs:int"/>
+      <xs:element name="id" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fault">
+    <xs:sequence>
+      <xs:element name="code" type="xs:int"/>
+      <xs:element minOccurs="0" name="text" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="bookMovieSubscription">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:movieSubscriptionAccount"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="movieSubscriptionAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="movieSubscription" type="tns:movieSubscription"/>
+      <xs:element minOccurs="0" name="person" type="tns:person"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="movieSubscription">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="from" type="xs:anySimpleType"/>
+      <xs:element minOccurs="0" name="to" type="xs:anySimpleType"/>
+      <xs:element minOccurs="0" name="typeAccount" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="person">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="bookMovieSubscriptionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:subscribingInfo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Fault" nillable="true" type="tns:fault"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="AccountSubscribingFaultMsg">
+    <wsdl:part element="tns:Fault" name="AccountSubscribingFaultMsg">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelBooking">
+    <wsdl:part element="tns:cancelBooking" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cancelBookingResponse">
+    <wsdl:part element="tns:cancelBookingResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="bookMovieSubscriptionResponse">
+    <wsdl:part element="tns:bookMovieSubscriptionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="bookMovieSubscription">
+    <wsdl:part element="tns:bookMovieSubscription" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="AccountSubsribingService">
+    <wsdl:operation name="cancelBooking">
+      <wsdl:input message="tns:cancelBooking" name="cancelBooking">
+    </wsdl:input>
+      <wsdl:output message="tns:cancelBookingResponse" name="cancelBookingResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:AccountSubscribingFaultMsg" name="AccountSubscribingFaultMsg">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="bookMovieSubscription">
+      <wsdl:input message="tns:bookMovieSubscription" name="bookMovieSubscription">
+    </wsdl:input>
+      <wsdl:output message="tns:bookMovieSubscriptionResponse" name="bookMovieSubscriptionResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:AccountSubscribingFaultMsg" name="AccountSubscribingFaultMsg">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AccountSubsribingServiceServiceSoapBinding" type="tns:AccountSubsribingService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="cancelBooking">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="cancelBooking">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelBookingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AccountSubscribingFaultMsg">
+        <soap:fault name="AccountSubscribingFaultMsg" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="bookMovieSubscription">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="bookMovieSubscription">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="bookMovieSubscriptionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AccountSubscribingFaultMsg">
+        <soap:fault name="AccountSubscribingFaultMsg" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AccountSubsribingServiceService">
+    <wsdl:port binding="tns:AccountSubsribingServiceServiceSoapBinding" name="AccountSubsribingServicePort">
+      <soap:address location="http://localhost:8081/soap-api/service/subscription"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

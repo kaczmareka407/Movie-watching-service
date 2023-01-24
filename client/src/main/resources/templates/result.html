@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Result of reserve movie to watch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<style>
+    h1 {
+        text-align: center;
+        border: 1px solid seagreen;
+    }
+
+    h2 {
+        margin: 50px;
+    }
+
+    h3 {
+        margin: 50px;
+    }
+
+    p {
+        margin: 50px;
+    }
+</style>
+<body>
+<h1>Result</h1>
+<h2>Payment information:</h2>
+<div>
+    <p th:text="'Transaction ID: ' + ${paymentResponse.transactionId}"/>
+    <p th:text="'Cost: ' + ${paymentResponse.cost}"/>
+    <p th:text="'Credit card type: ' + ${paymentResponse.paymentCard.name}"/>
+    <p th:text="'Credit card valid to: ' + ${paymentResponse.paymentCard.validTo}"/>
+    <p th:text="'Credit card number: ' + ${paymentResponse.paymentCard.number}"/>
+</div>
+<h2>Watching IDs</h2>
+<div>
+    <p th:text="'Watching ID: ' + ${paymentResponse.watchingId}"/>
+    <p th:text="'Movie booking ID: ' + ${paymentResponse.movieBookingId}"/>
+</div>
+<a href="/watching">Choose another movie to watch</a>
+<br>
+<a href="/watching/payment">Get payment information</a>
+</body>
+</html>

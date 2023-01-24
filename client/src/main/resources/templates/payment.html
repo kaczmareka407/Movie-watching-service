@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Payment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<style>
+    h1 {
+        text-align: center;
+        border: 1px solid yellowgreen;
+    }
+
+    h2 {
+        margin: 50px;
+    }
+
+    h3 {
+        margin: 50px;
+    }
+
+    p {
+        margin: 50px;
+    }
+</style>
+<body>
+<h1>Get payment information</h1>
+<form action="#" th:action="@{/watching/payment}" method="post">
+    <div id="transactionID">
+        <p>Transaction ID: <input type="text" th:name="id"/></p>
+    </div>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+<a href="/watching">Choose another movie to watch</a>
+</body>
+</html>

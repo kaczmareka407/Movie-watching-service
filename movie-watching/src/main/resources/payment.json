@@ -1,0 +1,183 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8083",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/payment": {
+      "post": {
+        "tags": [
+          "payment-service"
+        ],
+        "summary": "payment operation",
+        "description": "operation for payment",
+        "operationId": "payment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment/{id}": {
+      "get": {
+        "tags": [
+          "payment-service"
+        ],
+        "summary": "payment information",
+        "description": "payment information",
+        "operationId": "getPayment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PaymentCard": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "validTo": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentResponse": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentCard": {
+            "$ref": "#/components/schemas/PaymentCard"
+          },
+          "cost": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "watchingId": {
+            "type": "string"
+          },
+          "movieBookingId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "accountsubscribingId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ExceptionResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentRequest": {
+        "type": "object",
+        "properties": {
+          "paymentCard": {
+            "$ref": "#/components/schemas/PaymentCard"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "watchingId": {
+            "type": "string"
+          },
+          "movieBookingId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "accountsubscribingId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
+}
